@@ -206,7 +206,8 @@ class importer {
 
     /**
      * Delete never login account
-     * @param string $userid
+     *
+     * @param object $user
      * @return bool
      */
     public function delete_never_login($user): bool {
@@ -539,8 +540,8 @@ class importer {
     /**
      * Searches LDAP for user records that were updated/created after a given datetime.
      *
-     * @param string $baseDn the base DN
-     * @param string $ldapTimestamp the datetime
+     * @param \LDAP\Connection $ldap the LDAP connection
+     * @param string $ldaptimestamp the datetime
      * @return array nested array of user records
      * @throws Exception if search fails
      */
