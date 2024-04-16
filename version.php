@@ -18,8 +18,7 @@
  * Plugin version info
  *
  * @package    tool_ldapsync
- * @copyright  Copyright (c) 2019, UCSF Center for Knowledge Management
- * @author     2020 Carson Tam {@email carson.tam@ucsf.edu}
+ * @copyright  The Regents of the University of California
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 

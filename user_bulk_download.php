@@ -17,9 +17,9 @@
 /**
  * Bulk export user into any dataformat
  *
- * @license    http://www.gnu.org/copyleft/gpl.html GNU Public License
- * @copyright  2007 Petr Skoda
  * @package    tool_ldapsync
+ * @copyright  The Regents of the University of California
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 define('NO_OUTPUT_BUFFERING', true);

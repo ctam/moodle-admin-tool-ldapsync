@@ -27,8 +27,7 @@
  * define('TEST_AUTH_LDAP_DOMAIN', 'dc=example,dc=local');
  *
  * @package    tool_ldapsync
- * @copyright  Copyright (c) 2024, UCSF Center for Knowledge Management
- * @author     2024 Carson Tam {@email carson.tam@ucsf.edu}
+ * @copyright  The Regents of the University of California
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -46,7 +45,7 @@ class Testable_tool_ldapsync_importer extends \tool_ldapsync\importer {
 /**
  * Test case for ldapsync importer
  */
-class tool_ldapsync_importer_testcase extends advanced_testcase {
+class importer_test extends \advanced_testcase {
     private $sync = null;
 
     protected function setUp(): void {

@@ -18,8 +18,8 @@
  * importer.php
  *
  * @package tool_ldapsync
- * @author Carson Tam <carson.tam@ucsf.edu>
- * @copyright Copyright (c) 2024, UCSF Center for Knowledge Management
+ * @copyright  The Regents of the University of California
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
  * Run this script on a daily basis via cron job to synchronize user data between a given LDAP server
  * and the moodle database.

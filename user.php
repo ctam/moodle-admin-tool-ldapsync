@@ -14,14 +14,20 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Bulk user action form
+ * (Copied from user_bulk_action_form() in admin/user/user_bulk/user_bulk_forms.php.)
+ *
+ * @package    tool_ldapsync
+ * @copyright  The Regents of the University of California
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
     require_once('../../../config.php');
     require_once($CFG->libdir . '/adminlib.php');
     require_once($CFG->libdir . '/authlib.php');
     require_once($CFG->dirroot . '/user/filters/lib.php');
     require_once($CFG->dirroot . '/user/lib.php');
-
-//
-// Copied from user_bulk_action_form() in admin/user/user_bulk/user_bulk_forms.php.
 
 /**
  * Create a form that is similar to user bulk form to filter users for purging

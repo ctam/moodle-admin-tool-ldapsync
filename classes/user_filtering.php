@@ -18,8 +18,8 @@
  * This file contains the User Filter API.
  *
  * @package   tool_ldapsync
- * @copyright Copyright (c) 2020, UCSF Center for Knowledge Management
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright  The Regents of the University of California
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace tool_ldapsync;
@@ -66,8 +66,6 @@ class user_filtering extends \user_filtering {
 
 /**
  * Generic yes/no filter with radio buttons for integer fields.
- * @copyright Copyright (c) 2019, UCSF Center for Knowledge Management
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class user_filter_activeonldap extends \user_filter_yesno {
     /**

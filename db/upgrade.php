@@ -18,6 +18,9 @@
  * Function to upgrade tool_ldapsync.
  *
  * @package tool_ldapsync
+ * @copyright  The Regents of the University of California
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ *
  * @param int $oldversion the version we are upgrading from
  * @return bool result
  */

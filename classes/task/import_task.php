@@ -18,8 +18,7 @@
  * A scheduled task for LDAP user sync.
  *
  * @package    tool_ldapsync
- * @author     Carson Tam <carson.tam@ucsf.edu>
- * @copyright  Copyright (c) 2019, UCSF Center for Knowledge Management
+ * @copyright  The Regents of the University of California
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 namespace tool_ldapsync\task;
