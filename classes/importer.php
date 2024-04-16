@@ -67,7 +67,7 @@ class importer {
 
     /**
      * Moodle custom fields to sync with.
-     * @var array()
+     * @var array
      */
     private $customfields = null;
 
@@ -83,12 +83,14 @@ class importer {
     protected $ldapdt = '';
 
     /**
-     * @var integer $_ts UNIX timestamp
+     * @var int $_ts UNIX timestamp
      */
     protected $ts = 0;
 
     /**
-     * @param integer $ts
+     * Constructor for importer class.
+     *
+     * @param int $ts
      */
     public function __construct($ts = null) {
         // Making sure php-ldap extension is present.
@@ -1005,7 +1007,6 @@ EOL;
      *
      * @return array
      */
-
     public function ldap_attributes() {
         $moodleattributes = [];
         // If we have custom fields then merge them with user fields.

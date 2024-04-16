@@ -31,10 +31,12 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace tool_ldapsync;
+
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Testable object for the importer
+ * Testable object for the importer to test the private method, updatemoodleaccounts
  */
 class Testable_tool_ldapsync_importer extends \tool_ldapsync\importer {
     public function updatemoodleaccounts(array $data) {
@@ -46,6 +48,9 @@ class Testable_tool_ldapsync_importer extends \tool_ldapsync\importer {
  * Test case for ldapsync importer
  */
 class importer_test extends \advanced_testcase {
+    /**
+     * @var \Testable_tool_ldapsync_importer $sync An instanace of the importer class.
+     */
     private $sync = null;
 
     protected function setUp(): void {
@@ -108,6 +113,8 @@ class importer_test extends \advanced_testcase {
     }
 
     /**
+     * Test adding new user from LDAP to Moodle.
+     *
      * @dataProvider ldapsync_data_provider
      */
     public function test_adding_new_users(array $ldapuser, array $expected) {
@@ -301,15 +308,16 @@ class importer_test extends \advanced_testcase {
     }
 
     /**
-     * Test data set
+     * Test data set.
      *
      * The format for these data is:
      * [ 'Test case description' => [
      *      [LDAP data set],
      *      [Expected Moodle field to match] => [Expected LDAP field to match] ]
      * ]
+     * @return array
      */
-    public function ldapsync_data_provider() {
+    public static function ldapsync_data_provider(): array {
         return [
             'Simple case' => [
                 [

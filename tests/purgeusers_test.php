@@ -31,6 +31,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace tool_ldapsync;
+
 defined('MOODLE_INTERNAL') || die();
 
 /**
@@ -46,7 +48,13 @@ class Testable_tool_ldapsync_importer_for_purgeusers extends \tool_ldapsync\impo
  * Test case for purgeusers
  */
 class purgeusers_test extends \advanced_testcase {
+    /**
+     * @var $sync An instance of the import object.
+     */
     private $sync = null;
+    /**
+     * @var $ldapconn Keep the LDAP connection throughout a test.
+     */
     private $ldapconn = null;
 
     protected function setUp(): void {
@@ -157,9 +165,11 @@ class purgeusers_test extends \advanced_testcase {
     }
 
     /**
+     * Check if users are in LDAP.
+     *
      * @group ldaptests
      */
-    public function testcheckifusersinldap() {
+    public function test_check_if_users_in_ldap() {
         try {
             $ldap = $this->sync->ldap_connect();
         } catch (Exception $e) {
@@ -181,9 +191,11 @@ class purgeusers_test extends \advanced_testcase {
 
 
     /**
+     * Test setting deleted flag for never logged in users.
+     *
      * @group ldaptests
      */
-    public function testsetdeletedflagforneverloginusers() {
+    public function test_set_deleted_flag_for_never_logged_in_users() {
         global $CFG;
 
         require_once($CFG->dirroot . '/user/lib.php');
@@ -227,9 +239,11 @@ class purgeusers_test extends \advanced_testcase {
 
 
     /**
+     * Test if user is enrolled in any course.
+     *
      * @group ldaptests
      */
-    public function testisuserenrolledinanycourse() {
+    public function test_is_user_enrolled_in_any_course() {
         global $CFG, $DB;
         $this->resetAfterTest(true);
 

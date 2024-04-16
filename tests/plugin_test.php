@@ -31,6 +31,8 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+namespace tool_ldapsync;
+
 defined('MOODLE_INTERNAL') || die();
 
 /**
@@ -58,7 +60,13 @@ class Testable_tool_ldapsync_importer_for_plugin extends \tool_ldapsync\importer
  * Test case for ldapsync plugin
  */
 class plugin_test extends \advanced_testcase {
+    /**
+     * @var $sync An instance of the importer class.
+     *  */
     private $sync = null;
+    /**
+     * @var $ldapconn Keep an instance of the connection throughout a test.
+     */
     private $ldapconn = null;
 
     protected function setUp(): void {
@@ -182,6 +190,8 @@ class plugin_test extends \advanced_testcase {
     }
 
     /**
+     * Test LDAP connection.
+     *
      * @group ldaptests
      */
     public function test_connecttoldap() {
@@ -195,19 +205,21 @@ class plugin_test extends \advanced_testcase {
     }
 
     /**
+     * Test the importer::getupdatesfromldap() method.
+     *
      * @group ldaptests
      * @depends test_connecttoldap
      */
     public function test_get_updates_from_ldap() {
         $ldap = $this->sync->connecttoldap();
 
-        // Create a few users
+        // Create a few users.
         $topdn = 'dc=moodletest,' . TEST_TOOL_LDAPSYNC_DOMAIN;
         for ($i = 1; $i <= 5; $i++) {
             $this->create_ldap_user($this->ldapConn, $topdn, $i);
         }
 
-        // Test with current time + 7 days, expect no update returned
+        // Test with current time + 7 days, expect no update returned.
         $ts = date('YmdHis\Z', time() + 7 * 24 * 3600);
         $result = $this->sync->getupdatesfromldap($ldap, $ts);
         $this->assertEmpty($result);
@@ -225,7 +237,7 @@ class plugin_test extends \advanced_testcase {
             $this->assertArrayHasKey('mail', $ldapentry);
             $this->assertArrayHasKey('initials', $ldapentry);
             $this->assertArrayHasKey('displayname', $ldapentry);
-            // UCSF specifics
+            // UCSF specifics.
             $this->assertArrayHasKey('ucsfeduidnumber', $ldapentry);
             $this->assertArrayHasKey('edupersonprincipalname', $ldapentry);
             $this->assertArrayHasKey('ucsfedupreferredgivenname', $ldapentry);
@@ -237,13 +249,17 @@ class plugin_test extends \advanced_testcase {
     }
 
     /**
+     * Test for difference scenarios running importer, importer::run().
+     *
+     * Commented out for now.  Remove it once we have written tests for each case.
+     *
      * @group ldaptests
      * @depends test_connecttoldap
      */
     public function test_tool_ldapsync_importer() {
         global $CFG, $DB;
 
-        // // Create new empty test container.
+        // Create new empty test container.
         $topdn = 'dc=moodletest,' . TEST_TOOL_LDAPSYNC_DOMAIN;
 
         // Create a few users.
@@ -261,7 +277,8 @@ class plugin_test extends \advanced_testcase {
         $sink->close();
         ob_end_clean();
 
-        // @TODO Check events, 5 users created. (We should generate user created events but we're not.  So, skip this test for now.)
+        // @TODO Check events, 5 users created. (We should generate user created events but we're not.
+        // So, skip this test for now.)
         // $this->assertCount(5, $events);
         // foreach ($events as $index => $event) {
         // $usercreatedindex = array(0, 2, 4, 5, 6);
