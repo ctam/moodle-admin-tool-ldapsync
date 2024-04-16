@@ -36,10 +36,16 @@ namespace tool_ldapsync;
 defined('MOODLE_INTERNAL') || die();
 
 /**
- * Testable object for the importer
+ * Testable object for the importer to test importer::getupdatesfromldap() function, that
+ * searches LDAP for user records that were updated/created after a given datetime.
+ *
+ * @param \LDAP\Connection $ldap the LDAP connection
+ * @param string $ldaptimestamp the datetime
+ * @return array nested array of user records
+ * @throws Exception if search fails
  */
 class Testable_tool_ldapsync_importer_for_purgeusers extends \tool_ldapsync\importer {
-    public function getupdatesfromldap($ldap, $ldaptimestamp = null) {
+    public function getupdatesfromldap($ldap, $ldaptimestamp = null): array {
         // Change visibility to allow tests to call protected function.
         return parent::getupdatesfromldap($ldap, $ldaptimestamp);
     }
