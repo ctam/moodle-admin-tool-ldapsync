@@ -182,7 +182,7 @@ class importer {
     /**
      * Check if user exists in ldap
      * @param string $userid
-     * return # of users not in LDAP.
+     * @return int # of users not in LDAP.
      */
     public function check_users_in_ldap($userid) {
         if (is_array($userid)) {
@@ -207,8 +207,9 @@ class importer {
     /**
      * Delete never login account
      * @param string $userid
+     * @return bool
      */
-    public function delete_never_login($user) {
+    public function delete_never_login($user): bool {
         global $DB;
 
         if (isset($user->lastlogin) && $user->lastlogin == 0) {
@@ -371,12 +372,12 @@ class importer {
 
     /**
      * Returns all usernames from LDAP
-     * (copy from auth/ldap/auth.php)
      *
-     * @param $filter An LDAP search filter to select desired users
+     * @see auth_plugin_ldap::ldap_get_userlist($filter='*') in '{moodle_root}/auth/ldap/auth.php'
+     * @param string $filter An LDAP search filter to select desired users
      * @return array of LDAP user names converted to UTF-8
      */
-    private function ldap_get_userlist($filter = '*') {
+    private function ldap_get_userlist($filter = '*'): array {
         global $CFG;
 
         $fresult = [];
@@ -537,13 +538,13 @@ class importer {
 
     /**
      * Searches LDAP for user records that were updated/created after a given datetime.
-     * @param \LDAP\Connection $ldap the LDAP connection
+     *
      * @param string $baseDn the base DN
      * @param string $ldapTimestamp the datetime
      * @return array nested array of user records
      * @throws Exception if search fails
      */
-    protected function getupdatesfromldap($ldap, $ldaptimestamp = null) {
+    protected function getupdatesfromldap($ldap, $ldaptimestamp = null): array {
         if (empty($ldaptimestamp)) {
             echo "Start prowling LDAP for all records... ";
             $filter = '(&(' . $this->config->user_attribute . '=*)' . $this->config->objectclass . ')';

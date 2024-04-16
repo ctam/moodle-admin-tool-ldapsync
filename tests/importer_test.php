@@ -115,6 +115,8 @@ class importer_test extends \advanced_testcase {
     /**
      * Test adding new user from LDAP to Moodle.
      *
+     * @param array $ldapuser
+     * @param array $expected
      * @dataProvider ldapsync_data_provider
      */
     public function test_adding_new_users(array $ldapuser, array $expected) {

@@ -61,9 +61,13 @@ unset($countries);
 
 /**
  * Sort function that can sort last access time
+ *
  * @package tool_ldapsync
+ * @param string $a
+ * @param string $b
+ * @return int
  */
-function sort_compare($a, $b) {
+function sort_compare($a, $b): int {
     global $sort, $dir;
     if ($sort == 'lastaccess') {
         $rez = $b->lastaccess - $a->lastaccess;
