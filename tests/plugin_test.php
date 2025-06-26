@@ -107,19 +107,19 @@ class plugin_test extends advanced_testcase {
             $this->markTestSkipped('Can not connect to LDAP test server: ' . $debuginfo);
         }
 
-        $this->ldapConn = $connection;
+        $this->ldapconn = $connection;
 
         // Create new empty test container.
         $topdn = 'dc=moodletest,' . TEST_TOOL_LDAPSYNC_DOMAIN;
 
         // Let tearDown() handle it.
-        $this->recursive_delete($this->ldapConn, TEST_TOOL_LDAPSYNC_DOMAIN, 'dc=moodletest');
+        $this->recursive_delete($this->ldapconn, TEST_TOOL_LDAPSYNC_DOMAIN, 'dc=moodletest');
 
         $o = [];
         $o['objectClass'] = ['dcObject', 'organizationalUnit'];
         $o['dc']         = 'moodletest';
         $o['ou']         = 'MOODLETEST';
-        if (!ldap_add($this->ldapConn, 'dc=moodletest,' . TEST_AUTH_LDAP_DOMAIN, $o)) {
+        if (!ldap_add($this->ldapconn, 'dc=moodletest,' . TEST_AUTH_LDAP_DOMAIN, $o)) {
             $this->markTestSkipped('Can not create test LDAP container.');
         }
 
@@ -127,7 +127,7 @@ class plugin_test extends advanced_testcase {
         $o = [];
         $o['objectClass'] = ['organizationalUnit'];
         $o['ou']          = 'users';
-        ldap_add($this->ldapConn, 'ou=' . $o['ou'] . ',' . $topdn, $o);
+        ldap_add($this->ldapconn, 'ou=' . $o['ou'] . ',' . $topdn, $o);
 
         $gmtts = strtotime('2000-01-01 00:00:00');
 
@@ -183,10 +183,10 @@ class plugin_test extends advanced_testcase {
      * Tear down test case
      */
     protected function tearDown(): void {
-        if (!$this->ldapConn) {
-            $this->recursive_delete($this->ldapConn, TEST_TOOL_LDAPSYNC_DOMAIN, 'dc=moodletest');
-            ldap_close($this->ldapConn);
-            $this->ldapConn = null;
+        if (!$this->ldapconn) {
+            $this->recursive_delete($this->ldapconn, TEST_TOOL_LDAPSYNC_DOMAIN, 'dc=moodletest');
+            ldap_close($this->ldapconn);
+            $this->ldapconn = null;
         }
 
         // Use ob_end_flush() to flush to standard output.
@@ -221,7 +221,7 @@ class plugin_test extends advanced_testcase {
         // Create a few users
         $topdn = 'dc=moodletest,' . TEST_TOOL_LDAPSYNC_DOMAIN;
         for ($i = 1; $i <= 5; $i++) {
-            $this->create_ldap_user($this->ldapConn, $topdn, $i);
+            $this->create_ldap_user($this->ldapconn, $topdn, $i);
         }
 
         // Test with current time + 7 days, expect no update returned
@@ -267,7 +267,7 @@ class plugin_test extends advanced_testcase {
 
         // Create a few users.
         for ($i = 1; $i <= 5; $i++) {
-            $this->create_ldap_user($this->ldapConn, $topdn, $i);
+            $this->create_ldap_user($this->ldapconn, $topdn, $i);
         }
 
         $this->assertEquals(2, $DB->count_records('user'));
